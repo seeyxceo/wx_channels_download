@@ -2,11 +2,38 @@
 
 体积小、使用简单、支持 macOS 和 Windows 系统。
 
+## 251027 更新
+
+1、优化了文件大小，现在只有8MB了
+<br/>
+2、`download` 命令默认多线程下载
+<br/>
+3、直播详情页增加了下载按钮
+<br/>
+4、默认下载原始规格的视频
+
+
+<details><summary>点击查看更多更新内容</summary>
+
+## 250913 更新
+
+1、视频号首页增加下载按钮
+<br/>
+2、增加 `uninstall` 命令，可卸载本工具安装的根证书
+<br/>
+3、修复打开长视频页面空白的问题
+
+
+## 250808 更新
+
+1、修复了微信新版本没有下载按钮的问题
+
+
 ## 250621 更新
 
 1、优化下载时的「进度」展示效果
 <br/>
-2、增加 `download` 命令，可在终端下载视频及解密。超过1G的视频建议使用该方式下载
+2、增加 `download` 命令，可在终端下载视频及解密。超过 1G 的视频建议使用该方式下载
 <br/>
 
 ```bash
@@ -15,11 +42,11 @@
 # 视频地址、文件名参数需要双引号包裹。解密key不用双引号
 # 将会下载视频到 `Downloads` 目录，然后解密
 ```
+
 3、视频号「更多」菜单中增加「打印下载命令」按钮
 <br/>
 4、修复安装证书时有些错误提示不是中文的问题
 
-<details><summary>点击查看更多更新内容</summary>
 
 ## 250514 更新
 
@@ -28,7 +55,6 @@
 ## 25042501 更新
 
 1、修复了下载的视频无法播放的问题
-
 
 ## 250425 更新
 
@@ -41,7 +67,6 @@
 2、修复了 更多按钮点击不显示更多菜单的问题
 <br/>
 3、增加了 windows 启动失败时提示是否以管理员身份运行
-
 
 ## 250215 更新
 
@@ -70,11 +95,11 @@
 macOS 下使用说明
 
 ```bash
-chmod +x ./wx_video_download_drawin_xxx
-sudo ./wx_video_download_drawin_xxx
+chmod +x ./wx_video_download_darwin_xxx
+sudo ./wx_video_download_darwin_xxx
 ```
 
-此时会提示文件不能打开，需要到系统设置中允许，然后重新执行 `sudo ./wx_video_download_drawin_xxx`。
+此时会提示文件不能打开，需要到系统设置中允许，然后重新执行 `sudo ./wx_video_download_darwin_xxx`。
 <br/>
 
 在安装证书的过程中会申请权限，同意即可。后续打开无需使用 `sudo`，只需要双击运行
@@ -86,7 +111,6 @@ sudo ./wx_video_download_drawin_xxx
 > 当出现网络无法访问时请检查系统代理并手动取消即可。
 
 <br/>
-
 
 ## 241106 更新
 
@@ -175,7 +199,7 @@ sudo ./wx_video_download_drawin_xxx
 
 ![视频下载成功](assets/screenshot2.png)
 
-默认会下载下拉菜单中第一个质量视频。点开更多，可以下载其他质量的视频，包括原始视频。
+默认会下载原始视频。点开更多，可以下载其他质量的视频（xWT111、xWT126 等）。
 
 ![下载不同质量的视频](assets/screenshot13.png)
 <br>
@@ -207,17 +231,24 @@ sudo ./wx_video_download_drawin_xxx
 # windows
 
 ```bash
-go build -o wx_video_download.exe main.go
+go build -ldflags="-s -w"
 ```
 
-打包后可以使用 `upx` 压缩，体积可以从 17MB 压缩到 5MB。
+打包后可以使用 `upx` 压缩，进一步减小体积
+
+```bash
+upx wx_channel
+```
 
 # macOS
 
 ```bash
-CGO_ENABLED=1 GOOS=darwin GOARCH=amd64 SDKROOT=$(xcrun --sdk macosx --show-sdk-path) go build -o wx_video_download
+CGO_ENABLED=1 GOOS=darwin SDKROOT=$(xcrun --sdk macosx --show-sdk-path) go build -trimpath -ldflags="-s -w" -o wx_video_download
 ```
 
+```bash
+CGO_ENABLED=1 GOOS=darwin GOARCH=amd64 SDKROOT=$(xcrun --sdk macosx --show-sdk-path) go build -trimpath -ldflags="-s -w" -o wx_video_download
+```
 
 ## 其他
 
@@ -234,7 +265,6 @@ https://github.com/qtgolang/SunnyNet
 如果我的项目对你有所帮助，可以请我喝杯咖啡 ☕️
 
 [![Sponsors](https://sponsorkit-iota.vercel.app/api/sponsors)](https://sponsorkit-iota.vercel.app/api/sponsors)
-
 
 ```text
                  本项目为开源项目
